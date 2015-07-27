@@ -20,11 +20,26 @@ best <- function(state, outcome) {
             suppressWarnings(StateData[, 17]<- as.numeric(StateData[, 17]))
             suppressWarnings(StateData[, 23]<- as.numeric(StateData[, 23]))
             
-            rates <- StateData[, 11] ## vector of rate
-            minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
-            bestHospital <- StateData[c(2,11)]
+            if(outcome == "heart attack") {
+                rates <- StateData[, 11] ## vector of rate
+                minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
+                bestHospital <- StateData[c(2,11)]
+            }
+            if(outcome == "heart failure") {
+                rates <- StateData[, 17] ## vector of rate
+                minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
+                bestHospital <- StateData[c(2,17)]
+            }
+            if(outcome == "pneumonia") {
+                rates <- StateData[, 23] ## vector of rate
+                minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
+                bestHospital <- StateData[c(2,23)]
+            }
+
             bestHospital <- bestHospital[complete.cases(bestHospital),]
             names(bestHospital) <- c("Hospital.Name","Rate")
+            
+            ## select Hospital(s) with the min rate
             bestHospital <- bestHospital[bestHospital$Rate == minRate,]
             
             ## order by hospital name
