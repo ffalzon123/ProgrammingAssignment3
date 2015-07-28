@@ -61,13 +61,19 @@ rankall <- function(outcome, num = "best") {
     }
     
     ## filter by rank
-    hospitalRank <- hospitalRank[hospitalRank$Rank == num,]
+    if(num != "worst"){
+      hospitalRank <- hospitalRank[hospitalRank$Rank == num,]
+    } else {
+      worstRank <- aggregate(Rank ~ State, hospitalRank, max)
+      hospitalRank <- merge(x = worstRank, y = hospitalRank, by = c("State","Rank"), all.x = TRUE)
+      hospitalRank <- hospitalRank[,c(3,1)]
+    }
+    
     
     ## Return a data frame with the hospital names and the
     ## (abbreviated) state name
     dfOfStates <- data.frame(vectorOfStates)
-    
-    print(class(dfOfStates))
+
     names(dfOfStates) <- c("State")
     results <- merge(x = dfOfStates, y = hospitalRank, by = "State", all.x = TRUE)
     results <- results[,c(2,1)]

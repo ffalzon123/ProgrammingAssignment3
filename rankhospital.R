@@ -22,17 +22,14 @@ rankhospital <- function(state, outcome, num = "best") {
       
       if(outcome == "heart attack") {
         rates <- StateData[, 11] ## vector of rate
-        ##minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
         hospitalRank <- StateData[c(2,11)]
       }
       if(outcome == "heart failure") {
         rates <- StateData[, 17] ## vector of rate
-        ##minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
         hospitalRank <- StateData[c(2,17)]
       }
       if(outcome == "pneumonia") {
         rates <- StateData[, 23] ## vector of rate
-        ##minRate <- min(rates, na.rm = TRUE) ## min rate for outcome
         hospitalRank <- StateData[c(2,23)]
       }
 
