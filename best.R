@@ -45,18 +45,18 @@ best <- function(state, outcome) {
             ## order by hospital name
             bestHospital <- bestHospital[with(bestHospital, order(Hospital.Name)),]
             
-
+            ## Return hospital name in that state with lowest 30-day death
+            ## rate
             return(bestHospital[1,1])
             
         } else {
-            print("invalid outcome")
+            stop("invalid outcome")
         }
         
     } else {
-        print("invalid state")
+        stop("invalid state")
     }
     
-    ## Return hospital name in that state with lowest 30-day death
-    ## rate
+
     
 }
